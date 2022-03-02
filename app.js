@@ -29,7 +29,7 @@ const types = {
   ice: '#96D9D6'
 };
 
-
+// fetching all data needed from the API
 const fetchPokemon = () => {
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${POKE_TOTAL}`)
     .then(response => response.json())
@@ -40,6 +40,7 @@ const fetchPokemon = () => {
     })
 }
 
+// Adding some parameters to the API call
 const fetchPokemonFull = (pokemon) => {
   let objPokemonFull = {};
   let url = pokemon.url;
@@ -70,6 +71,7 @@ const fetchPokemonFull = (pokemon) => {
     })
 }
 
+// Creating light and dark conversion colors
 function lightenDarkenColor(col, amt) {
 
   let usePound = false;
@@ -91,9 +93,9 @@ function lightenDarkenColor(col, amt) {
   else if (g < 0) g = 0;
 
   return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
-
 }
 
+// Converter RGB to HEX function
 function rgbToHex(col)
 {
   if(col.charAt(0) === 'r')
@@ -109,7 +111,7 @@ function rgbToHex(col)
   }
 }
 
-
+// Creating the cards
 const createPokeCard = (array) => {
   for (let i = 0; i < array.length; i++) {
     const card = document.createElement('li');
@@ -145,6 +147,7 @@ window.addEventListener('scroll', function () {
   }
 });
 
+// Function allowing to add pokemons
 const addPokeCard = (nb) => {
   if (INDEX > POKE_TOTAL) {
     return;
@@ -155,8 +158,7 @@ const addPokeCard = (nb) => {
   INDEX += nb;
 }
 
-
-
+// Search function
 const searchPoke = () => {
   if (INDEX < POKE_TOTAL) {
     addPokeCard(SEARCH_RESULT_NUMBER);
@@ -178,6 +180,7 @@ const searchPoke = () => {
   }
 }
 
+// Event listeners to handle the search label animation
 searchInput.addEventListener('input', function (e) {
   if (e.target.value !== '') {
     e.target.parentElement.classList.add('active-input');
